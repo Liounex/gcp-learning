@@ -1,3 +1,4 @@
+/*
 resource "google_compute_instance" "instance-2" {
   boot_disk {
     auto_delete = true
@@ -51,3 +52,5 @@ resource "google_compute_instance" "instance-2" {
 
 
 }
+
+*/
