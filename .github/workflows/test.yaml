@@ -8,7 +8,7 @@ on:
     branches:
       - main
 env: 
-  REGISTRY: docker.io
+  REGISTRY: jhimmy
   IMAGE_NAME: jhimmy
   PROJECT_NAME: test-dev-54830
 
