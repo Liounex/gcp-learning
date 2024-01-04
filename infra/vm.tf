@@ -1,7 +1,7 @@
-resource "google_compute_instance" "instance-1" {
+resource "google_compute_instance" "instance-2" {
   boot_disk {
     auto_delete = true
-    device_name = "instance-1"
+    device_name = "instance-2"
 
     initialize_params {
       image = "projects/debian-cloud/global/images/debian-11-bullseye-v20231212"
@@ -21,7 +21,7 @@ resource "google_compute_instance" "instance-1" {
   }
 
   machine_type = "f1-micro"
-  name         = "instance-1"
+  name         = "instance-2"
 
   network_interface {
     access_config {
