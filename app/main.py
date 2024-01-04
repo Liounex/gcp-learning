@@ -12,10 +12,10 @@ def read_root():
 
 
 @app.get("/pokemon/{pokemon_name}")
-def get_pokemon_details(pokemon_name: str):
+def get_pokemon_detailss(pokemon_name: str):
     pokemon = pokemon_data.get(pokemon_name.lower())
     if not pokemon:
-        return {"error": "Pokemon not found"}
+        return {"error": "Pokemon not founddd"}
     return pokemon
 
 
