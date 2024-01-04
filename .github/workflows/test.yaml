@@ -10,6 +10,7 @@ on:
 env: 
   REGISTRY: docker.io
   IMAGE_NAME: ${{ github.repository }}
+  PROJECT_NAME: test-dev-54830
 
 jobs:
   test:
