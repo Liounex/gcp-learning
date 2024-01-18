@@ -1,6 +1,6 @@
 services:
   app:
-    image: liounex/test-dev:latest
+    image: liounex/gcp-learning:master
     ports:
       - "8000:8000"
     networks:
