@@ -62,3 +62,17 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  deploy:
+            runs-on: ubuntu-latest
+            steps:
+              - name: deployment
+                id: deployment
+                uses: appleboy/ssh-action@master
+                with:
+                  host: ${{ secrets.HOST }}
+                  username: ${{ secrets.USERNAME }}
+                  key: ${{ secrets.KEY }}
+                  script: |
+                    docker-compose up --build -d
+                    docker-compose up -d
