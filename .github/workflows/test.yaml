@@ -64,15 +64,15 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
   deploy:
-            runs-on: ubuntu-latest
-            steps:
-              - name: Deploy to EC2
-                id: deploy
-                uses: appleboy/ssh-action@master
-                with:
-                  host: ${{ secrets.HOST }}
-                  username: ${{ secrets.USERNAME }}
-                  key: ${{ secrets.KEY }}
-                  script: |
-                    docker-compose up --build -d
-                    docker-compose up -d
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to EC2
+        id: deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            docker-compose up --build -d
+            docker-compose up -d 
