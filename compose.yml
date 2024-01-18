@@ -1,13 +1,13 @@
-services:
+services: 
   app:
-    image: liounex/gcp-learning:master
+    image: nilofe/test-cev:main
     ports:
       - "8000:8000"
     networks:
-      - app-network
+      - app-net
 
   nginx:
-    container_name: nginx-app
+    container_name: nginx
     restart: always
     build: 
       context: ./jobs
@@ -15,7 +15,8 @@ services:
       - "80:80"
       - "443:443"
     networks:
-      - app-network
+      - app-net
 
+ 
 networks:
-  app-network:
+  app-net:
