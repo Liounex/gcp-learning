@@ -66,8 +66,8 @@ jobs:
   deploy:
             runs-on: ubuntu-latest
             steps:
-              - name: deployment
-                id: deployment
+              - name: Deploy to EC2
+                id: deploy
                 uses: appleboy/ssh-action@master
                 with:
                   host: ${{ secrets.HOST }}
