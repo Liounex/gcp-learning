@@ -1,14 +1,14 @@
-name: Run Tests
+name: Run Tests-Image
 
 
 
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   test:
