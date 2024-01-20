@@ -32,7 +32,8 @@ jobs:
       run: |
         python -m pytest tests/
 
-  push-image-docker:
+  push-image-docker-building:
+    needs: test
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -55,15 +56,25 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: build and push docker image
+      - name: build and push docker image 1
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+      
+      - name: build and push docker image 2
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: ./jobs
+          push: true
+          tags: liounex/mginx-docker
+          labels: |
+           liounex/mginx-docker=latest
 
   deploy:
+    needs: push-image-docker-building
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to EC2
@@ -74,5 +85,12 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
-            docker-compose up --build -d
-            docker-compose up -d 
+            docker image rm -rf $(docker images -aq )
+            docker stop $(docker ps -aq)
+            docker rm $(docker ps -aq)
+            docker pull liounex/gcp-learning:main
+            docker pull liounex/mginx-docker
+            docker network create app-net-1
+            docker run -d --name app --network app-net-1 -p 8000:8000 liounex/gcp-learning:main 
+            docker run -d --name nginx-dev --network app-net-1 -p 80:80 -p 443:443 liounex/mginx-docker:latest 
+      
